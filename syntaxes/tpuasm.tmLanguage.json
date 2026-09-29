@@ -1,0 +1,239 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "TPU Assembly",
+  "scopeName": "source.tpuasm",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#target" },
+    { "include": "#directive" },
+    { "include": "#label" },
+    { "include": "#bundle" },
+    { "include": "#separator" }
+  ],
+  "repository": {
+    "comment": {
+      "name": "comment.line.number-sign.tpuasm",
+      "begin": "#",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.comment.tpuasm" }
+      },
+      "end": "$"
+    },
+    "target": {
+      "name": "meta.target.tpuasm",
+      "match": "(?<![\\w.])(\\.target)\\b[ \\t]+(tpu-(?:v4-(?:tc|bcs)|v6e-tc))\\b",
+      "captures": {
+        "1": { "name": "keyword.control.directive.tpuasm" },
+        "2": { "name": "constant.language.target.tpuasm" }
+      }
+    },
+    "directive": {
+      "name": "meta.directive.tpuasm",
+      "begin": "(?<![\\w.])\\.(?:align|empty)\\b",
+      "beginCaptures": {
+        "0": { "name": "keyword.control.directive.tpuasm" }
+      },
+      "end": "(?=[;#])|$",
+      "patterns": [{ "include": "#number" }]
+    },
+    "label": {
+      "match": "\\b([A-Za-z_][A-Za-z_0-9]*)(:)",
+      "captures": {
+        "1": { "name": "storage.type.label.tpuasm" },
+        "2": { "name": "punctuation.separator.label.tpuasm" }
+      }
+    },
+    "bundle": {
+      "name": "meta.bundle.tpuasm",
+      "begin": "\\{",
+      "beginCaptures": {
+        "0": { "name": "punctuation.section.block.begin.tpuasm" }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": { "name": "punctuation.section.block.end.tpuasm" }
+      },
+      "patterns": [
+        { "include": "#comment" },
+        { "include": "#encoding" },
+        { "include": "#branch-label" },
+        { "include": "#instruction" },
+        { "include": "#separator" }
+      ]
+    },
+    "branch-label": {
+      "name": "meta.instruction.branch.tpuasm",
+      "match": "\\b(s[01])(:)[ \\t]*(?:(@!?)(p[0-9]+)[ \\t]+)?(s(?:br|call)\\.(?:rel|abs))[ \\t]+(?:(s[0-9]+)[ \\t]*(,)[ \\t]*)?([A-Za-z_][A-Za-z_0-9]*)(?=[ \\t;#}]|$)",
+      "captures": {
+        "1": { "name": "support.type.slot.tpuasm" },
+        "2": { "name": "punctuation.separator.slot.tpuasm" },
+        "3": { "name": "keyword.operator.predicate.tpuasm" },
+        "4": { "name": "variable.language.register.predicate.tpuasm" },
+        "5": { "name": "keyword.control.instruction.tpuasm" },
+        "6": { "name": "variable.language.register.scalar.tpuasm" },
+        "7": { "name": "punctuation.separator.operands.tpuasm" },
+        "8": { "name": "storage.type.label.tpuasm" }
+      }
+    },
+    "instruction": {
+      "name": "meta.instruction.tpuasm",
+      "begin": "\\b(s[01]|dma|va[0-3]|vst|vld[01]?|cld|vx[01]|vr[01]|misc)(:)[ \\t]*(?:(@!?)(p[0-9]+)[ \\t]+)?([a-z][a-z0-9_.]*)(?=[ \\t;{}#]|$)",
+      "beginCaptures": {
+        "1": { "name": "support.type.slot.tpuasm" },
+        "2": { "name": "punctuation.separator.slot.tpuasm" },
+        "3": { "name": "keyword.operator.predicate.tpuasm" },
+        "4": { "name": "variable.language.register.predicate.tpuasm" },
+        "5": { "name": "keyword.control.instruction.tpuasm" }
+      },
+      "end": "(?=[;}#])|$",
+      "patterns": [{ "include": "#operand" }]
+    },
+    "encoding": {
+      "name": "meta.encoding.tpuasm",
+      "begin": "(\\.encoding)\\b",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.directive.tpuasm" }
+      },
+      "end": "(?<=\\})",
+      "patterns": [
+        { "include": "#comment" },
+        {
+          "begin": "\\{",
+          "beginCaptures": {
+            "0": { "name": "punctuation.section.block.begin.tpuasm" }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": { "name": "punctuation.section.block.end.tpuasm" }
+          },
+          "patterns": [
+            { "include": "#comment" },
+            {
+              "name": "variable.other.encoding.tpuasm",
+              "match": "\\b[a-z][a-z0-9_]*(?:\\.[a-z][a-z0-9_]*)*(?=[ \\t]*=)"
+            },
+            { "include": "#operand" }
+          ]
+        }
+      ]
+    },
+    "operand": {
+      "patterns": [
+        { "include": "#comment" },
+        { "include": "#memory" },
+        { "include": "#function" },
+        { "include": "#tuple" },
+        {
+          "name": "variable.parameter.operand.tpuasm",
+          "match": "\\b[a-z][a-z0-9_]*(?=[ \\t]*=)"
+        },
+        { "include": "#number" },
+        { "include": "#register" },
+        {
+          "name": "constant.other.resource.tpuasm",
+          "match": "\\b[a-z][a-z0-9_]*(?:\\.[a-z][a-z0-9_]*)+\\b"
+        },
+        {
+          "name": "constant.other.symbol.tpuasm",
+          "match": "\\b[A-Za-z_][A-Za-z_0-9]*\\b"
+        },
+        { "include": "#operator" },
+        { "include": "#separator" }
+      ]
+    },
+    "memory": {
+      "name": "meta.address.tpuasm",
+      "begin": "\\[",
+      "beginCaptures": {
+        "0": { "name": "punctuation.section.brackets.begin.tpuasm" }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": { "name": "punctuation.section.brackets.end.tpuasm" }
+      },
+      "patterns": [
+        {
+          "match": "\\b([a-z][a-z0-9_]*)(:)",
+          "captures": {
+            "1": { "name": "support.type.memory-space.tpuasm" },
+            "2": { "name": "punctuation.separator.address.tpuasm" }
+          }
+        },
+        { "include": "#operand" }
+      ]
+    },
+    "function": {
+      "name": "support.function.encoding.tpuasm",
+      "match": "\\b(?:f32bits|const|lo|hi|ones_hi|pair)(?=[ \\t]*\\()"
+    },
+    "tuple": {
+      "name": "meta.group.tpuasm",
+      "begin": "\\(",
+      "beginCaptures": {
+        "0": { "name": "punctuation.section.parens.begin.tpuasm" }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": { "name": "punctuation.section.parens.end.tpuasm" }
+      },
+      "patterns": [{ "include": "#operand" }]
+    },
+    "register": {
+      "patterns": [
+        {
+          "name": "variable.language.register.predicate.tpuasm",
+          "match": "\\bp[0-9]+\\b"
+        },
+        {
+          "name": "variable.language.register.scalar.tpuasm",
+          "match": "\\bs[0-9]+\\b"
+        },
+        {
+          "name": "variable.language.register.vector.tpuasm",
+          "match": "\\bv[0-9]+\\b"
+        },
+        {
+          "name": "variable.language.register.mask.tpuasm",
+          "match": "\\bvm[0-9]+\\b"
+        },
+        {
+          "name": "variable.language.register.special.tpuasm",
+          "match": "\\b(?:(?:gmr|gsfn|gsft|msra|mrf|trf|iar|gtc)[0-9]+|crf|erf|v2sf|lcclo|lcchi|gtclo|gtchi)\\b"
+        },
+        {
+          "name": "constant.other.resource.tpuasm",
+          "match": "\\b(?:imm[0-9]+|vs[0-9]+)\\b"
+        }
+      ]
+    },
+    "number": {
+      "patterns": [
+        {
+          "name": "constant.numeric.hex.tpuasm",
+          "match": "(?<![\\w.])[+-]?0x[0-9a-fA-F]+(?![\\w.])"
+        },
+        {
+          "name": "constant.numeric.float.tpuasm",
+          "match": "(?<![\\w.])[+-]?(?:(?:[0-9]+\\.[0-9]*|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?|[0-9]+[eE][+-]?[0-9]+|inf)(?![\\w.])"
+        },
+        {
+          "name": "constant.numeric.integer.tpuasm",
+          "match": "(?<![\\w.])[+-]?[0-9]+(?![\\w.])"
+        }
+      ]
+    },
+    "operator": {
+      "patterns": [
+        { "name": "keyword.operator.assignment.tpuasm", "match": "=" },
+        { "name": "keyword.operator.arithmetic.tpuasm", "match": "[+-]" },
+        { "name": "keyword.operator.logical.tpuasm", "match": "!" }
+      ]
+    },
+    "separator": {
+      "patterns": [
+        { "name": "punctuation.separator.operands.tpuasm", "match": "," },
+        { "name": "punctuation.terminator.statement.tpuasm", "match": ";" }
+      ]
+    }
+  }
+}

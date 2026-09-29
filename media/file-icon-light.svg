@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <title>TPU Assembly</title>
+  <desc>Four compute tiles in a simple two-by-two grid.</desc>
+  <path d="M2 2H7V7H2Z" fill="#1A73E8"/>
+  <path d="M9 2H14V7H9Z" fill="#D93025"/>
+  <path d="M2 9H7V14H2Z" fill="#D99A00"/>
+  <path d="M9 9H14V14H9Z" fill="#188038"/>
+</svg>

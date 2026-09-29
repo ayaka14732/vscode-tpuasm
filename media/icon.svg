@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none">
+  <title>TPU Assembly</title>
+  <desc>A graphite TPU package with a connected compute array in Google blue, red, yellow and green, a machine-cut TPU label, and the binary byte 01011010.</desc>
+  <defs>
+    <path id="zero" fill-rule="evenodd" d="M0 0H5V8H0ZM1.5 1.5V6.5H3.5V1.5Z"/>
+    <path id="one" d="M2 0H3.5V6.5H5V8H0V6.5H2V2H.5V.5H2Z"/>
+  </defs>
+
+  <rect width="256" height="256" rx="32" fill="#F8F9FA"/>
+
+  <!-- Straight package leads, laid out on a fixed hardware grid. -->
+  <path d="M68 28V44M92 28V44M116 28V44M140 28V44M164 28V44M188 28V44
+           M68 212V228M92 212V228M116 212V228M140 212V228M164 212V228M188 212V228
+           M32 68H52M32 92H52M32 116H52M32 140H52M32 164H52M32 188H52
+           M204 68H224M204 92H224M204 116H224M204 140H224M204 164H224M204 188H224"
+        stroke="#9AA0A6" stroke-width="8"/>
+
+  <!-- The clipped corner is the package orientation mark. -->
+  <path d="M64 44H204V212H52V56Z" fill="#202124"/>
+  <path d="M64 50H198V206" stroke="#3C4043" stroke-width="2"/>
+
+  <!-- Neighbour-to-neighbour links suggest a systolic compute array. -->
+  <path d="M86 78H170M86 106H170M86 134H170M86 162H170
+           M86 78V162M114 78V162M142 78V162M170 78V162"
+        stroke="#80868B" stroke-width="3"/>
+
+  <!-- A diagonal colour wave moves through the matrix. -->
+  <g fill="#4285F4">
+    <rect x="76" y="68" width="20" height="20"/>
+    <rect x="104" y="68" width="20" height="20"/>
+    <rect x="132" y="68" width="20" height="20"/>
+    <rect x="76" y="96" width="20" height="20"/>
+    <rect x="104" y="96" width="20" height="20"/>
+    <rect x="76" y="124" width="20" height="20"/>
+  </g>
+  <g fill="#EA4335">
+    <rect x="160" y="68" width="20" height="20"/>
+    <rect x="132" y="96" width="20" height="20"/>
+    <rect x="104" y="124" width="20" height="20"/>
+    <rect x="76" y="152" width="20" height="20"/>
+  </g>
+  <g fill="#FBBC05">
+    <rect x="160" y="96" width="20" height="20"/>
+    <rect x="132" y="124" width="20" height="20"/>
+    <rect x="104" y="152" width="20" height="20"/>
+  </g>
+  <g fill="#34A853">
+    <rect x="160" y="124" width="20" height="20"/>
+    <rect x="132" y="152" width="20" height="20"/>
+    <rect x="160" y="152" width="20" height="20"/>
+  </g>
+
+  <path d="M70 182H186" stroke="#5F6368" stroke-width="2"/>
+
+  <!-- Outlined lettering and binary glyphs keep exports font-independent. -->
+  <path transform="translate(70 189)" fill="#F8F9FA" fill-rule="evenodd"
+        d="M0 0H10V2H6V12H4V2H0Z
+           M14 12V0H24V8H16V12ZM16 2V6H22V2Z
+           M28 0H30V10H36V0H38V12H28Z"/>
+  <g fill="#BDC1C6">
+    <use href="#zero" x="126" y="191"/>
+    <use href="#one" x="134" y="191"/>
+    <use href="#zero" x="142" y="191"/>
+    <use href="#one" x="150" y="191"/>
+    <use href="#one" x="158" y="191"/>
+    <use href="#zero" x="166" y="191"/>
+    <use href="#one" x="174" y="191"/>
+    <use href="#zero" x="182" y="191"/>
+  </g>
+</svg>

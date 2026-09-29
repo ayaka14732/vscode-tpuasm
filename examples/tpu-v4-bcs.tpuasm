@@ -1,0 +1,15 @@
+.target tpu-v4-bcs
+
+# Offline assembly example: explicit schedule, not an executable runtime service.
+entry:
+{ s0: smov s1, 0x12345678 ;
+  s1: smov s2, 0xdeadbeef }
+{ s0: sadd.s32 s3, s1, 7 }
+{}
+{ s1: sst [smem:31], s3 }
+{ s0: srdreg s4, gtc0 ;
+  s1: srdreg s5, gtc1 }
+{ s0: @p0 sbr.rel entry }
+{}
+{ s0: shalt }
+.align 16

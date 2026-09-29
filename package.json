@@ -1,0 +1,73 @@
+{
+  "name": "tpuasm",
+  "displayName": "TPU Assembly",
+  "description": "TPU assembly syntax highlighting for VS Code",
+  "icon": "media/icon.png",
+  "version": "0.1.7",
+  "publisher": "katrine-jensen-next",
+  "author": "Katrine Jensen",
+  "license": "MPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ayaka14732/vscode-tpuasm.git"
+  },
+  "homepage": "https://github.com/ayaka14732/vscode-tpuasm#readme",
+  "bugs": {
+    "url": "https://github.com/ayaka14732/vscode-tpuasm/issues"
+  },
+  "pricing": "Free",
+  "engines": {
+    "vscode": "^1.85.0",
+    "node": ">=26.0.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "tpuasm",
+    "TPU",
+    "assembly",
+    "TensorCore",
+    "BarnaCore"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "tpuasm",
+        "aliases": [
+          "TPU Assembly",
+          "tpuasm"
+        ],
+        "extensions": [
+          ".tpuasm"
+        ],
+        "firstLine": "^\\s*\\.target\\s+tpu-(?:v4-(?:tc|bcs)|v6e-tc)\\b",
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./media/file-icon-light.svg",
+          "dark": "./media/file-icon-dark.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "tpuasm",
+        "scopeName": "source.tpuasm",
+        "path": "./syntaxes/tpuasm.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "package": "node scripts/package-vsix.mjs"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "4.0.0"
+  },
+  "packageManager": "pnpm@11.13.1"
+}

@@ -1,0 +1,20 @@
+.target tpu-v4-tc
+# 汇编样例：覆盖 12 个物理槽；用于语法和操作数核对，未经设备执行。
+
+entry:
+{ s0: simm.s32 s0, 7 ;
+  s1: simm.s32 s1, 21 }
+{ va0: vadd.8x128.s32 v2, v3, v1 }
+{ va1: vshll.8x128.s32 v4, v2, 2 }
+{ vst: vst.8x128 [vmem:0x48], v4 }
+{ vld: vld.8x128 v5, [vmem:0x40] }
+{ cld: cld.8x128 crf, [cmem:0] }
+{ vx0: vdwg.128x128.f16 gmr0, gsfn0 }
+{ vx1: vmatmul.8x128.f32 mrf0, v9 }
+{ vr0: vpop.8x128 v10, mrf0 }
+{ vr1: vpop.8x128 v11, crf }
+{ misc: vwait.ge [sflag:511], s4 }
+{ s0: @!p0 sbr.rel entry }
+{ s0: sfence }
+{ s0: shalt }
+.align 10
