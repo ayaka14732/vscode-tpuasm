@@ -1,0 +1,22 @@
+.target tpu-v6e-tec
+
+entry:
+{ s0: simm.s32 s0, 0x7 ;
+  s1: simm.s32 s1, 0x12345678 ;
+  misc: ssyncset.s32 [sflag:s5], 0x0 }
+{ va0: vadd.s32 v2, v3, v1 ;
+  va1: vmul.f32 v4, 1.5, v2 ;
+  va2: vxor.u32 v5, 0x7, v2 ;
+  vld: vld v6, [tilespmem:0x80] ;
+  vst: vst [tilespmem:0x400], v4 }
+{ vr: vpop v10, erf }
+{ vr: vmovc v11, v10 }
+{ stream: @!p0 stream.linear.gather [tilespmem:s0], [sflag:0x1], [hbm4b:s1+s0], 0x400, 0x38 }
+{ dma: @!p0 dma.local [timem:s3], [sflag:s2], [hbm:s0], s1 }
+{ misc: @!p0 swait.ge [sflag:s1], 0x400 }
+{ misc: yieldable_sync_done x=0x1 }
+{ s0: @p1 sbr.rel entry ;
+  s1: sadd.s32 s5, 0x1, s5 }
+{ s0: sfence }
+{ misc: sbarrier.arrive [bflag:0x3], 0xffff }
+{ s0: shalt }

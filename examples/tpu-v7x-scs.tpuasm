@@ -1,0 +1,275 @@
+.target tpu-v7x-scs
+entry:
+{ s0: sbr.rel L_0088, 3 }
+{ s0: ssettag 0x0 ;
+  s1: simm.s32 lr, 0x1 }
+{ s1: sst [smem:0x3fa0], lr ;
+  misc: strace 0xd0000000 }
+{}
+{}
+{}
+{}
+{}
+{ s1: sst [smem:0x3faf], s0 }
+{ s1: sst [smem:0x3fb0], s1 }
+{ s1: sst [smem:0x3fb1], s2 }
+{ s1: sst [smem:0x3fb2], s3 }
+{ s1: sst [smem:0x3fb3], s4 }
+{ s1: sst [smem:0x3fb4], s5 }
+{ s1: sst [smem:0x3fb5], s6 }
+{ s1: sst [smem:0x3fb6], s7 }
+{ s1: sst [smem:0x3fb7], s8 }
+{ s0: @!p0 simm.s32 s0, 0x0 ;
+  s1: sst [smem:0x3fb8], s9 }
+{ s0: @p0 simm.s32 s0, 0x1 ;
+  s1: sld s1, [smem:0x3f9e] }
+{ s0: @!p1 simm.s32 s0, 0x0 ;
+  s1: sst [smem:0x3fb9], s0 }
+{ s0: @p1 simm.s32 s0, 0x1 ;
+  s1: sld s2, [smem:0x3f9d] }
+{ s0: @!p2 simm.s32 s0, 0x0 ;
+  s1: sst [smem:0x3fba], s0 }
+{ s0: @p2 simm.s32 s0, 0x1 ;
+  s1: sld s3, [smem:0x3fdb] }
+{ s0: simm.s32 s4, 0x1bf5 ;
+  s1: sst [smem:0x3fbc], s0 ;
+  .encoding { s1.y = zero_imm0 } }
+{ s1: sld s0, [smem:0x3f9f] ;
+  misc: swait.ge [sflag:s4], 0x0 }
+{ s1: sld s7, [smem:0x3fa0] }
+{ s0: sadd.s32 s8, 0xffffe003, lr }
+{ s0: slt.u32 p2, s8, 0xfffff086 ;
+  s1: simm.s32 s5, 0xffffffff ;
+  misc: sadd.s32 s9, 0xfffffef7, lr ;
+  .encoding { s0.y = ones_imm0 } }
+{ s0: @!p2 simm.s32 s5, 0x0 ;
+  s1: slt.u32 p1, s9, 0xf7a }
+{ s0: seq.s32 p0, s7, s2 ;
+  s1: @p1 simm.s32 s5, 0x1 }
+{ s0: @!p0 smul.u32 s7, 0xf7a, s2 ;
+  s1: @!p0 seq.s32 p2, s5, 0x0 }
+{ s0: smul.u32 s9, 0xf7a, s1 ;
+  s1: por p2, !p2, p0 ;
+  misc: @!p0 simm.s32 s8, 0x1bf5 }
+{ s0: @!p0 simm.s32 s7, 0x108 ;
+  s1: @!p0 sadd.s32 s6, s3, s7 ;
+  misc: @!p0 ssyncset.s32 [sflag:s8], 0xfffff086 }
+{ s0: @p2 simm.s32 s7, 0x1082 ;
+  s1: @!p0 sadd.s32 s6, 0x88, s6 ;
+  misc: sadd.s32 s3, s3, s9 ;
+  .encoding { s1.y = zero_imm1 } }
+{ dma: @!p0 dma.local [simem:s7], [sflag:s8], [hbm:s6], 0xf7a }
+{ s0: simm.s32 s6, 0x108 ;
+  s1: sor.u32 s9, 0xd0000000, s2 ;
+  misc: @!p0 swait.ge [sflag:s8], 0x0 }
+{ s0: @!p1 simm.s32 s6, 0x1082 ;
+  s1: sadd.s32 s3, 0x88, s3 ;
+  misc: ssyncset.s32 [sflag:s4], 0xfffff086 ;
+  .encoding { s1.y = zero_imm2 } }
+{ dma: dma.local [simem:s6], [sflag:s4], [hbm:s3], 0xf7a }
+{ s0: ssettag s2 ;
+  s1: sst [smem:0x3fa0], s1 ;
+  misc: strace s9 }
+{ s1: sld s1, [smem:0x3fb0] }
+{ s1: sld s2, [smem:0x3fb1] }
+{ s1: sld s4, [smem:0x3fb3] }
+{ s0: seq.s32 p0, s5, 0x0 ;
+  s1: sld s5, [smem:0x3fb4] }
+{ s1: sld s6, [smem:0x3fb5] }
+{ s1: sld s7, [smem:0x3fb6] }
+{ s0: simm.s32 s3, 0x108 ;
+  s1: sld s8, [smem:0x3fb7] }
+{ s0: @!p0 simm.s32 s3, 0x1082 ;
+  s1: sld s9, [smem:0x3fb8] }
+{ s0: sadd.s32 lr, s0, s3 ;
+  s1: sld s0, [smem:0x3faf] }
+{ s1: sld s3, [smem:0x3fb2] }
+{ s1: sst [smem:0x3fbb], s10 }
+{ s0: sdelay 0x3 ;
+  s1: sld s10, [smem:0x3fb9] }
+{ s0: sdelay 0x3 ;
+  s1: sld s10, [smem:0x3fbb] ;
+  misc: seq.s32 p0, s10, 0x1 }
+{ s1: sst [smem:0x3fbb], s10 }
+{ s0: sdelay 0x3 ;
+  s1: sld s10, [smem:0x3fba] }
+{ s0: sdelay 0x3 ;
+  s1: sld s10, [smem:0x3fbb] ;
+  misc: seq.s32 p1, s10, 0x1 }
+{ s1: sst [smem:0x3fbb], s10 }
+{ s1: sld s10, [smem:0x3fbc] }
+{ s0: sbr.ind lr, 3 }
+{}
+{}
+{ s0: seq.s32 p2, s10, 0x1 ;
+  s1: sld s10, [smem:0x3fbb] }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+{ s0: shalt }
+L_0088:
+{ s1: sld s0, [smem:0x3fd9] }
+{ s0: sdelay 0x3 ;
+  s1: sld s1, [smem:0x3ffe] }
+{ s0: sadd.s32 s0, s1, s0 }
+{ s1: sst [smem:0x3fc7], s0 }
+{}
+{ s1: sld s2, [smem:0x3fc9] }
+{ s1: sld s0, [smem:0x3fd0] ;
+  misc: ssettm 0x1 }
+{ s0: sdelay 0x3 ;
+  s1: sld s24, [smem:0x3ffb] }
+{ misc: strace s24 }
+{ s0: sdelay 0x3 ;
+  s1: sld s1, [smem:0x3ffc] }
+{ misc: strace s1 }
+{ s0: sdelay 0x3 ;
+  s1: sld s1, [smem:0x3ffd] }
+{ misc: strace s1 }
+{ s0: simm.s32 s3, 0x9 ;
+  misc: strace 0x8fffffff }
+{ s0: sdelay 0x1 ;
+  misc: ssyncset.s32 [sflag:s3], 0x0 }
+{ s0: simm.s32 s25, 0x1b8b }
+{ misc: swait.ge [sflag:s25], 0x1 }
+{ s0: sdelay 0x3 ;
+  s1: sld s4, [smem:0x3fe7] }
+{ s0: sadd.s32 s4, 0x4e, s4 ;
+  misc: ssyncset.done [sflag:s25], 0x0 }
+{ s0: sand.u32 s4, 0xfffffff, s4 ;
+  s1: simm.s32 s26, 0x1b8e ;
+  misc: ssyncadd.s32 [sflag:s25], 0xffffffff }
+{ s0: sor.u32 s28, 0x80000000, s4 ;
+  s1: sst [smem:0x3fd2], s26 ;
+  .encoding { s1.y = zero_imm1 } }
+{ s0: simm.s32 s1, 0xa ;
+  s1: simm.s32 s29, 0x0 ;
+  misc: strace s28 }
+{ dma: dma.local [spmem:s29], [sflag:s1], [hbm:s2], 0x10 }
+{ misc: swait.ge [sflag:s1], 0x10 }
+{ misc: ssyncset.done [sflag:s1], 0x0 }
+{ misc: ssyncadd.s32 [sflag:s1], 0xfffffff0 }
+{ misc: ssyncadd.s32 [sflag:s3], 0xffffff80 }
+{ s0: simm.s32 s31, 0x9 ;
+  s1: simm.s32 s30, 0x10 }
+{ stream: stream.linear.gather [smem:s30], [sflag:0x9], [spmem:s29], 0x80, 0x38 ;
+  .encoding { vs0_used = 1 } }
+{ misc: swait.ge [sflag:s31], 0x0 }
+{ s0: simm.s32 s3, 0x4 ;
+  s1: simm.s32 s2, 0x0 ;
+  misc: ssyncset.done [sflag:s31], 0x0 }
+L_00a7:
+{ s0: sdelay 0x1 ;
+  s1: sld s4, [smem:s2+0x10] ;
+  misc: sne.s32 p0, s3, 0x1fc }
+{ s0: @p0 sbr.rel L_00a7, 3 }
+{}
+{ s0: sadd.s32 s4, 0x1, s4 }
+{ s0: sadd.s32 s3, 0x4, s3 ;
+  s1: sst [smem:s2+0x10], s4 ;
+  misc: sshra.s32 s2, s3, 0x2 }
+{ s0: sdelay 0x3 ;
+  s1: sld s3, [smem:s2+0x10] }
+{ s0: sadd.s32 s3, 0x1, s3 }
+{ s0: simm.s32 s24, 0xa ;
+  s1: sst [smem:s2+0x10], s3 ;
+  misc: simm.s32 s23, 0x10 }
+{ dma: dma.local [hbm:s0], [sflag:s1], [smem:s23], 0x10 }
+{ misc: swait.ge [sflag:s24], 0x10 }
+{ s0: sdelay 0x3 ;
+  s1: sld s25, [smem:0x3fe7] }
+{ s0: sadd.s32 s1, 0x4e, s25 }
+{ s0: sand.u32 s1, 0xfffffff, s1 ;
+  misc: ssyncset.done [sflag:s24], 0x0 }
+{ s0: sor.u32 s26, 0x90000000, s1 ;
+  misc: ssyncadd.s32 [sflag:s24], 0xfffffff0 ;
+  .encoding { s0.y = imm0_zero } }
+{ misc: strace s26 }
+{ s0: sfence }
+{ s1: sld s28, [smem:0x0] }
+{ s0: srdreg.scid s29 }
+{ s0: sshll.u32 s30, s29, 0xd }
+{ s0: sor.u32 s1, s30, s29 }
+{ s0: sshll.u32 s0, s28, 0x11 ;
+  s1: sand.u32 s1, 0x4001, s1 }
+{ s0: sor.u32 s0, s0, s1 }
+{ s0: sadd.s32 s0, 0x8f2b, s0 }
+{ s0: sdelay 0x1 ;
+  misc: ssyncadd.remote.s32 [sflag:s0], 0x1 }
+{ s0: sbr.abs entry, 3 ;
+  s1: sfence ;
+  misc: simm.s32 s31, 0x9 }
+{ misc: swait.eq [sflag:s31], 0x0 }
+{ misc: strace 0x9fffffff }
+{ misc: ssettm 0x7fffffff }

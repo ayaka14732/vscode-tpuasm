@@ -1,0 +1,21 @@
+.target tpu-v7x-tc
+entry:
+{ va0: @p3 vadd.8x128.s32 v2, v3, v1 ;
+  va1: @!p5 vadd.8x128.s32 v4, v5, v6 }
+L_0001:
+{ s0: sbr.rel L_0001, 6 }
+{ dma: dma.general.trace [smem0:v5], [self_hbm:v21], length=0, dst_flag=[sflag:s18], src_flag=[sflag:s31], stride_descriptor=[smem:s5], stride_count=7, ici_dest=s2, opcode=read_and_add, sync=descriptor, thread=1, host_upper=s24 ;
+  .encoding { dma.dma_sreg_dest_offset = 4 ; dma.dma_sreg_source_offset = 23 ; imm0 = 485498 ; imm1 = 643002 ; imm2 = 391445 ; imm3 = 280110 ; imm4 = 145269 ; imm5 = 195187 ; pred0 = 8 ; pred1 = 14 ; pred1_inv = 1 } }
+{}
+{}
+{}
+{}
+{}
+{}
+{}
+{}
+{}
+{}
+{}
+{}
+{}

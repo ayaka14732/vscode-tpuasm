@@ -21,7 +21,7 @@
     },
     "target": {
       "name": "meta.target.tpuasm",
-      "match": "(?<![\\w.])(\\.target)\\b[ \\t]+(tpu-(?:v4-(?:tc|bcs)|v6e-tc))\\b",
+      "match": "(?<![\\w.])(\\.target)\\b[ \\t]+(tpu-(?:v4-(?:tc|bcs)|v6e-(?:tc|tec)|v7x-(?:tc|tec|scs)))\\b",
       "captures": {
         "1": { "name": "keyword.control.directive.tpuasm" },
         "2": { "name": "constant.language.target.tpuasm" }
@@ -63,8 +63,8 @@
     },
     "branch-label": {
       "name": "meta.instruction.branch.tpuasm",
-      "match": "\\b(s[01])(:)[ \\t]*(?:(@!?)(p[0-9]+)[ \\t]+)?(s(?:br|call)\\.(?:rel|abs))[ \\t]+(?:(s[0-9]+)[ \\t]*(,)[ \\t]*)?([A-Za-z_][A-Za-z_0-9]*)(?=[ \\t;#}]|$)",
-      "captures": {
+      "begin": "\\b(s[01])(:)[ \\t]*(?:(@!?)(r?p[0-9]+)[ \\t]+)?(s(?:br|call)\\.(?:rel|abs))[ \\t]+(?:(s[0-9]+|lr)[ \\t]*(,)[ \\t]*)?([A-Za-z_][A-Za-z_0-9]*)(?=[ \\t,;#}]|$)",
+      "beginCaptures": {
         "1": { "name": "support.type.slot.tpuasm" },
         "2": { "name": "punctuation.separator.slot.tpuasm" },
         "3": { "name": "keyword.operator.predicate.tpuasm" },
@@ -73,11 +73,13 @@
         "6": { "name": "variable.language.register.scalar.tpuasm" },
         "7": { "name": "punctuation.separator.operands.tpuasm" },
         "8": { "name": "storage.type.label.tpuasm" }
-      }
+      },
+      "end": "(?=[;}#])|$",
+      "patterns": [{ "include": "#operand" }]
     },
     "instruction": {
       "name": "meta.instruction.tpuasm",
-      "begin": "\\b(s[01]|dma|va[0-3]|vst|vld[01]?|cld|vx[01]|vr[01]|misc)(:)[ \\t]*(?:(@!?)(p[0-9]+)[ \\t]+)?([a-z][a-z0-9_.]*)(?=[ \\t;{}#]|$)",
+      "begin": "\\b(s[01]|dma|va[0-3]|vst|vld[01]?|cld|vx[01]?|vr[01]?|misc|stream)(:)[ \\t]*(?:(@!?)(r?p[0-9]+)[ \\t]+)?([a-z][a-z0-9_.]*)(?=[ \\t;{}#]|$)",
       "beginCaptures": {
         "1": { "name": "support.type.slot.tpuasm" },
         "2": { "name": "punctuation.separator.slot.tpuasm" },
@@ -182,11 +184,11 @@
       "patterns": [
         {
           "name": "variable.language.register.predicate.tpuasm",
-          "match": "\\bp[0-9]+\\b"
+          "match": "\\br?p[0-9]+\\b"
         },
         {
           "name": "variable.language.register.scalar.tpuasm",
-          "match": "\\bs[0-9]+\\b"
+          "match": "\\b(?:s[0-9]+|lr)\\b"
         },
         {
           "name": "variable.language.register.vector.tpuasm",
@@ -198,11 +200,11 @@
         },
         {
           "name": "variable.language.register.special.tpuasm",
-          "match": "\\b(?:(?:gmr|gsfn|gsft|msra|mrf|trf|iar|gtc)[0-9]+|crf|erf|v2sf|lcclo|lcchi|gtclo|gtchi)\\b"
+          "match": "\\b(?:(?:gmr|gsfn|gsft|lmr|msra|msrb|mubr|subr|mrf|trf|iar|pcr|gtc)[0-9]+|crf|drf|erf|sfrf|xrf|v2sf|lcclo|lcchi|gtclo|gtchi)\\b"
         },
         {
           "name": "constant.other.resource.tpuasm",
-          "match": "\\b(?:imm[0-9]+|vs[0-9]+)\\b"
+          "match": "\\b(?:(?:zero_|ones_)?imm[0-9]+(?:_(?:imm[0-9]+|zero))?|vs[0-9]+|pred[0-9]+)\\b"
         }
       ]
     },
